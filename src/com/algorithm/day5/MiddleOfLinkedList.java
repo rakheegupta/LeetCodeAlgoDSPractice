@@ -1,5 +1,7 @@
 package com.algorithm.day5;
 
+import org.junit.Test;
+
 class ListNode {
     int val;
     ListNode next;
@@ -29,5 +31,10 @@ public class MiddleOfLinkedList {
             count++;
         }
         return count;
+    }
+
+    @Test
+    public void test1() {
+
     }
 }
