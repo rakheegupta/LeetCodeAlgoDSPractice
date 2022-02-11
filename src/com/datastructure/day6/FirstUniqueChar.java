@@ -2,32 +2,34 @@ package com.datastructure.day6;
 
 import org.junit.Test;
 
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
 public class FirstUniqueChar {
     public int firstUniqChar(String s) {
-        Map<Character,Integer> charIndex = new HashMap<Character,Integer>();
-        for(int i=0;i< s.length();i++) {
-
-        }
-        return minimum(charIndex.values().toArray(new Integer[0]));
+        Map<Character,Integer> charFreq = new HashMap<Character,Integer>();
+        setupFreq(s,charFreq);
+        return findFirstUniq(s,charFreq);
     }
 
-    int minimum(Integer[] vals) {
-        int min= vals[0];
-        for(int i=1;i<vals.length;i++) {
-            if(min > vals[i])
-                min=vals[i];
+    void setupFreq(String s, Map<Character,Integer> charFreq){
+        for(int i=0;i< s.length();i++) {
+            charFreq.put(s.charAt(i),charFreq.getOrDefault(s.charAt(i),0)+1);
         }
-        return min;
+    }
+
+    int findFirstUniq(String s, Map<Character,Integer>charFreq) {
+        for(int i=0;i<s.length();i++) {
+            if(charFreq.get(s.charAt(i))==1)
+                return i;
+        }
+        return -1;
     }
 
     @Test
     public void test1(){
         String s ="hello";
         System.out.println(firstUniqChar(s));
-        assert (firstUniqChar(s) == 0);
+        assert (firstUniqChar(s) == -1);
     }
 }
